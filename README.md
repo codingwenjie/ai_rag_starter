@@ -46,3 +46,30 @@ ai-rag-fastapi/
 ├── .env                    # 环境变量
 ├── requirements.txt        # Python 依赖
 └── main.py                 # 入口文件
+```
+
+🚀 快速启动
+
+1️⃣ 克隆项目
+```bash
+git clone https://github.com/codingwenjie/ai-rag-fastapi.git
+cd ai-rag-fastapi
+```
+2️⃣ 安装依赖
+```bash
+python3 -m venv venv
+source venv/bin/activate     # Windows 用 venv\Scripts\activate
+pip install -r requirements.txt
+```
+3️⃣ 配置环境变量
+创建 .env 文件，并添加如下内容（参考 .env.example）：
+```bash
+OPENAI_API_KEY=your_openai_key
+EMBEDDING_MODEL=text-embedding-ada-002
+```
+4️⃣ 运行服务
+```bash
+uvicorn main:app --reload
+```
+访问接口文档：http://localhost:8000/docs
+
