@@ -1,0 +1,7 @@
+fastapi
+# 用于运行FastAPI应用的ASGI服务器
+uvicorn
+# 用于处理请求参数
+pydantic
+# 用于加载环境变量
+python-dotenv
