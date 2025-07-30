@@ -35,12 +35,12 @@
 
 ```bash
 ai-rag-fastapi/
-├── app/                    # 主应用代码
-│   ├── api/                # FastAPI 路由
-│   ├── core/               # 配置与中间件
-│   ├── rag/                # RAG 相关逻辑（文档加载、分块、向量化、查询）
-│   ├── models/             # 请求响应模型
-│   └── utils/              # 工具类（日志等）
+
+│── api/                # FastAPI 路由
+│── core/               # 配置与中间件
+│── rag/                # RAG 相关逻辑（文档加载、分块、向量化、查询）
+│── models/             # 请求响应模型
+│── utils/              # 工具类（日志等）
 ├── docs/                   # 项目文档
 ├── tests/                  # 单元测试
 ├── .env                    # 环境变量
