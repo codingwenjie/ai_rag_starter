@@ -49,7 +49,7 @@ async def general_exception_handler(request: Request, exc: Exception):
 
 ```python
 from fastapi import FastAPI
-from app.core.exceptions import validation_exception_handler, general_exception_handler
+from core.exceptions import validation_exception_handler, general_exception_handler
 
 app = FastAPI()
 
@@ -111,7 +111,7 @@ PORT = int(os.getenv("PORT", 8000))
 第三步：在代码中使用配置：
 
 ```python
-from app.core.config import API_KEY, DEBUG
+from core.config import API_KEY, DEBUG
 
 print("当前使用 API_KEY 为：", API_KEY)
 

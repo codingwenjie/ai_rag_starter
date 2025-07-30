@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import chat
-from app.core.exceptions import validation_exception_handler, general_exception_handler
+from api import chat
+from core.exceptions import validation_exception_handler, general_exception_handler
 
 # 初始化 FastAPI 应用
 app = FastAPI()
