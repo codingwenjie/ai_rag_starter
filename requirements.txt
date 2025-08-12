@@ -1,7 +1,19 @@
-fastapi
+fastapi~=0.115.11
 # 用于运行FastAPI应用的ASGI服务器
 uvicorn
 # 用于处理请求参数
-pydantic
+pydantic~=2.10.6
 # 用于加载环境变量
-python-dotenv
+python-dotenv~=1.0.1
+
+dotenv~=0.9.9
+starlette~=0.46.1
+pip~=23.2.1
+attrs~=25.2.0
+distro~=1.9.0
+pillow~=11.1.0
+filelock~=3.17.0
+langchain~=0.3.20
+langchain-community~=0.3.19
+langchain-core~=0.3.44
+langchain-openai~=0.3.8

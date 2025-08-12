@@ -145,11 +145,7 @@ async def ask_question(data: QuestionRequest):
 
 你可以用 curl、Postman 或 FastAPI 的 Swagger UI：
 
-```
-http
-
-
-复制编辑
+```http
 POST http://localhost:8000/ask
 Content-Type: application/json
 
@@ -158,3 +154,10 @@ Content-Type: application/json
 }
 ```
 
+------
+
+## ✅ 小结
+
+- 你学会了什么是 LangChain，它如何连接 LLM 与外部工具
+- 完成了一个基础项目集成：输入问题 → LangChain 调用大模型 → 返回回答
+- 后续可以继续深入 Agent、Tool、RAG 等
