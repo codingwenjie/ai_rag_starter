@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="006f6cf7-8890-4d72-aeb4-d5d374200217" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/exceptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/exceptions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schemas/llm_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/llm_schema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/demo/langchain_agent.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/demo/langchain_chains.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/demo/langchain_memory.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/demo/langchain_modles.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/demo/langchain_prompt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/llm_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/llm_service.py" afterDir="false" />
-    </list>
+    <list default="true" id="006f6cf7-8890-4d72-aeb4-d5d374200217" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -200,7 +186,7 @@
       <workItem from="1754630753747" duration="456000" />
       <workItem from="1754638809250" duration="3183000" />
       <workItem from="1754963059321" duration="9045000" />
-      <workItem from="1756796538385" duration="1585000" />
+      <workItem from="1756796538385" duration="2194000" />
     </task>
     <servers />
   </component>
