@@ -4,6 +4,17 @@ from fastapi.exceptions import RequestValidationError
 from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
 
 
+# 自定义异常类
+class EmbeddingError(Exception):
+    """向量化相关异常"""
+    pass
+
+
+class VectorStoreError(Exception):
+    """向量存储相关异常"""
+    pass
+
+
 # 处理请求参数检验异常
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(

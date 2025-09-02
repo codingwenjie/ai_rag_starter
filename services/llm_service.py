@@ -1,6 +1,6 @@
-from langchain.chains import LLMChain
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI, OpenAI
+from langchain_core.output_parsers import StrOutputParser
 import os
 from dotenv import load_dotenv
 
@@ -28,20 +28,42 @@ llm = ChatOpenAI(
     presence_penalty=0,
 )
 
-# ============= 使用langchain =============
-template = """
-请你担任一名专业的诗人，根据下面的主题，写一首诗：
-主题：{topic}
-"""
-prompt = PromptTemplate(template = template, input_variables=["topic"])
-
-
-# 构建 LLMChain
-chain = LLMChain(llm = llm, prompt = prompt)
+# 获取OpenAI API密钥
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 def ask_llm(question: str) -> str:
-    response = chain.invoke({"topic": question})
-    return response['text']
+    """
+    使用LangChain调用大模型回答问题
+    
+    Args:
+        question: 用户问题
+        
+    Returns:
+        str: 模型回答
+    """
+    # 创建提示模板
+    prompt = PromptTemplate(
+        input_variables=["question"],
+        template="请回答以下问题：{question}"
+    )
+    
+    # 创建LLM实例
+    llm = ChatOpenAI(
+        model="gpt-3.5-turbo",
+        temperature=0.7,
+        api_key=OPENAI_API_KEY
+    )
+    
+    # 创建输出解析器
+    output_parser = StrOutputParser()
+    
+    # 使用新的RunnableSequence语法创建链
+    chain = prompt | llm | output_parser
+    
+    # 执行链
+    response = chain.invoke({"question": question})
+    
+    return response
 
 
 
