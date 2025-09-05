@@ -5,39 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="006f6cf7-8890-4d72-aeb4-d5d374200217" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api/dependencies/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/dependencies/rag_deps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/models/rag_models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/rag_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/routes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/routes/document_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/routes/qa_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/Day07-RAG检索增强生成实现.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/rag_demo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/vector_retrieval_demo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/rag/document_loader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/rag/rag_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/rag/retrieval_qa.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/rag/text_splitter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_documents/Python编程指南.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_documents/人工智能基础知识.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_documents/数据科学简介.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_documents/机器学习算法详解.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_documents/深度学习入门.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Day01-FastAPI 项目搭建与测试运行.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Day01-FastAPI 项目搭建与测试运行.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Day02-接口增强与配置管理.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Day02-接口增强与配置管理.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Day03-数据结构与序列化 - Pydantic Schema设计 + 响应标准化.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Day03-数据结构与序列化 - Pydantic Schema设计 + 响应标准化.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Day04-LangChain集成+大模型调用.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Day04-LangChain集成+大模型调用.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Day05-LangChain核心组件.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Day05-LangChain核心组件.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/Day06-向量数据库入门与实践.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Day06-向量数据库入门与实践.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/学习路线.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/学习路线.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/vectorDB/vector_store_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/vectorDB/vector_store_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/qa_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/qa_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/rag/rag_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/rag/rag_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +190,7 @@
       <workItem from="1754630753747" duration="456000" />
       <workItem from="1754638809250" duration="3183000" />
       <workItem from="1754963059321" duration="9045000" />
-      <workItem from="1756796538385" duration="20352000" />
+      <workItem from="1756796538385" duration="21561000" />
     </task>
     <servers />
   </component>

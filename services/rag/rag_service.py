@@ -107,8 +107,25 @@ class RAGService:
         if LANGCHAIN_AVAILABLE:
             self._initialize_langchain_components()
         
-        logger.info("RAG服务初始化完成")
+        # 尝试加载现有的向量索引
+        self._load_existing_vector_store()
         
+        logger.info("RAG服务初始化完成")
+
+    def _load_existing_vector_store(self):
+        """加载现有的向量存储索引
+        
+        尝试加载默认路径下的向量索引，如果存在则自动加载
+        """
+        try:
+            # 尝试加载向量存储服务的索引
+            if self.vector_store_service.load_index():
+                logger.info("成功加载现有向量存储索引")
+            else:
+                logger.info("未找到现有向量存储索引，将在首次使用时创建")
+        except Exception as e:
+            logger.warning(f"加载向量存储索引时出现异常: {e}")
+
     def _initialize_langchain_components(self):
         """初始化LangChain组件"""
         try:
@@ -794,6 +811,107 @@ class RAGService:
                 "source_documents": []
             }
     
+    async def hr_qa(self, question: str, collection_name: str = "default", k: int = 3) -> Dict[str, Any]:
+        """HR场景专用问答
+        
+        Args:
+            question: 候选人问题
+            collection_name: 集合名称
+            k: 检索文档数量
+            
+        Returns:
+            Dict[str, Any]: HR问答结果
+        """
+        try:
+            logger.info(f"开始HR问答处理: {question[:50]}...")
+            
+            # HR场景关键词映射，提高检索准确性
+            hr_keywords = {
+                "薪资": ["薪资", "工资", "待遇", "收入", "底薪", "绩效"],
+                "工作时间": ["工作时间", "上班时间", "班次", "排班", "倒班"],
+                "休息": ["休息", "公休", "假期", "休假", "法定"],
+                "要求": ["要求", "条件", "学历", "年龄", "技能"],
+                "地点": ["地点", "位置", "地址", "工作地", "办公地"]
+            }
+            
+            # 增强查询词，提高检索相关性
+            enhanced_query = question
+            for category, keywords in hr_keywords.items():
+                if any(keyword in question for keyword in keywords):
+                    enhanced_query += f" {category}"
+            
+            # 检索相关文档
+            if self.vector_store_service and self.vector_store_service.vector_store:
+                results = self.vector_store_service.similarity_search(
+                    query=enhanced_query,
+                    k=k
+                )
+                docs = [doc for doc, score in results]
+            elif self.vector_store:
+                docs = self.vector_store.similarity_search(enhanced_query, k=k)
+            else:
+                return {
+                    "answer": "抱歉，当前HR知识库不可用，请联系技术支持。",
+                    "source_documents": [],
+                    "sources": []
+                }
+            
+            # 构建HR专用上下文
+            context = "\n\n".join([doc.page_content for doc in docs])
+            
+            # HR场景专用提示模板
+            hr_prompt = f"""
+            你是一位专业的HR招聘顾问，正在与候选人进行招聘咨询。请基于以下招聘信息准确回答候选人的问题：
+            
+            招聘信息：
+            {context}
+            
+            候选人问题：{question}
+            
+            回答要求：
+            1. 语调友好、专业，体现HR的亲和力
+            2. 信息准确，直接引用招聘信息中的具体内容
+            3. 如果问题涉及薪资、工作时间等关键信息，请详细说明
+            4. 如果招聘信息中没有相关内容，请诚实告知并建议进一步沟通
+            5. 适当表达对候选人的关注和欢迎
+            
+            请回答：
+            """
+            
+            # 生成答案
+            if self.llm:
+                response = await self.llm.ainvoke(hr_prompt)
+                answer = response.content if hasattr(response, 'content') else str(response)
+            else:
+                answer = "抱歉，AI服务暂时不可用，请稍后再试或直接联系HR。"
+            
+            # 构建源文档信息
+            sources = []
+            for doc in docs:
+                source_info = {
+                    "content": doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content,
+                    "metadata": doc.metadata
+                }
+                sources.append(source_info)
+            
+            logger.info(f"HR问答处理完成，检索到 {len(docs)} 个相关文档")
+            
+            return {
+                "answer": answer,
+                "source_documents": docs,
+                "sources": sources,
+                "enhanced_query": enhanced_query
+            }
+            
+        except Exception as e:
+            logger.error(f"HR问答处理失败: {str(e)}")
+            return {
+                "answer": "抱歉，处理您的问题时出现了技术问题，请稍后再试或直接联系HR。",
+                "source_documents": [],
+                "sources": [],
+                "error": str(e)
+            }
+
     async def conversational_qa(self, question: str, collection_name: str = "default",
                                conversation_id: str = None, k: int = 3) -> Dict[str, Any]:
         """对话问答

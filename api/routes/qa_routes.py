@@ -116,6 +116,77 @@ async def ask_question(
         return handle_exception(e, "问答处理")
 
 
+@router.post("/hr", response_model=Dict[str, Any], summary="HR智能问答")
+async def hr_qa(
+    request: QuestionRequest,
+    collection_name: str = Depends(validate_collection_param),
+    rag_service=Depends(get_rag_service),
+    timer=Depends(get_request_timer),
+    user_id=Depends(validate_auth_token)
+):
+    """HR场景智能问答，专门处理候选人问题
+    
+    Args:
+        request: 问题请求
+        rag_service: RAG服务实例
+        timer: 请求计时器
+        user_id: 用户ID（可选）
+        
+    Returns:
+        Dict[str, Any]: HR问答响应
+    """
+    try:
+        logger.info(f"收到HR问答请求: {request.question[:50]}...")
+        
+        # 固定使用hr_qa集合
+        target_collection = collection_name  # 暂时使用default，因为文件被上传到了default集合
+        
+        # HR场景专用提示模板
+        hr_prompt = """
+        你是一位专业的HR招聘顾问，正在与候选人进行面试沟通。请基于以下招聘信息回答候选人的问题：
+        
+        {context}
+        
+        候选人问题：{question}
+        
+        请以友好、专业的语调回答，提供准确的招聘信息。如果问题涉及具体细节（如薪资、工作时间等），请直接引用招聘信息中的内容。
+        """
+        
+        # 使用HR专用问答模式
+        result = await rag_service.hr_qa(
+            question=request.question,
+            collection_name=target_collection,
+            k=request.k or 3
+        )
+        
+        # 构建响应
+        processing_time = timer.get_elapsed_time()
+        
+        response_data = QuestionResponse(
+            question=request.question,
+            answer=result.get("answer", ""),
+            source_documents=result.get("sources", []),
+            collection_name=target_collection,
+            qa_type="hr",
+            processing_time=processing_time,
+            metadata={
+                "enhanced_query": result.get("enhanced_query", request.question),
+                "retrieved_docs_count": len(result.get("source_documents", [])),
+                "hr_specialized": True
+            }
+        )
+        
+        logger.info(f"HR问答处理完成，耗时: {processing_time:.4f}秒")
+        return create_success_response(
+            data=response_data.model_dump(),
+            message="HR问答处理成功"
+        )
+        
+    except Exception as e:
+        logger.error(f"HR问答处理失败: {str(e)}")
+        return handle_exception(e, "HR问答处理失败")
+
+
 @router.post("/conversation", response_model=Dict[str, Any], summary="对话问答")
 async def conversation_qa(
     request: ConversationRequest,
