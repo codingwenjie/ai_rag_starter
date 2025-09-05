@@ -11,7 +11,7 @@ import numpy as np
 import faiss
 from langchain_community.vectorstores import FAISS
 from langchain_core.documents import Document
-from services.embedding_service import EmbeddingService
+from .embedding_service import EmbeddingService
 import logging
 from datetime import datetime
 
@@ -98,7 +98,7 @@ class VectorStoreService:
             logger.error(f"添加文档失败: {str(e)}")
             raise
     
-    async def similarity_search(
+    def similarity_search(
         self, 
         query: str, 
         k: int = 5, 

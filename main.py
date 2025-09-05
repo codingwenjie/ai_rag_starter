@@ -1,8 +1,18 @@
 import os
-from fastapi import FastAPI, APIRouter
+import logging
+from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from core.exceptions import validation_exception_handler, general_exception_handler
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+    ]
+)
 
 # 禁用 LangSmith 追踪以避免 Pydantic 兼容性问题
 os.environ["LANGCHAIN_TRACING_V2"] = "false"
@@ -35,18 +45,22 @@ except Exception as e:
     print(f"⚠️  Chat routes failed to load: {e}")
     print("🔧 Loading maintenance mode endpoints")
     
-    # 导入维护模式路由
-    from api import maintenance
-    app.include_router(maintenance.router, prefix="/api")
-    print("🔧 Providing maintenance mode endpoints")
 
-# 尝试导入向量检索API路由
+# 导入RAG API路由
 try:
-    from api import vector_retrieval
-    app.include_router(vector_retrieval.router, prefix="/api")
-    print("✅ Vector retrieval routes loaded successfully")
+    from api import rag_api
+    app.include_router(rag_api.router, prefix="/api")
+    print("✅ RAG API routes loaded successfully")
 except Exception as e:
-    print(f"⚠️  Vector retrieval routes failed to load: {e}")
-    print("ℹ️  Vector retrieval functionality will be unavailable")
+    print(f"⚠️  RAG API routes failed to load: {e}")
+
+# # 尝试导入向量检索API路由（如果存在）
+# try:
+#     from api import vector_retrieval
+#     app.include_router(vector_retrieval.router, prefix="/api")
+#     print("✅ Vector retrieval routes loaded successfully")
+# except Exception as e:
+#     print(f"⚠️  Vector retrieval routes failed to load: {e}")
+#     print("ℹ️  Vector retrieval functionality will be unavailable")
 
 print("🚀 Application startup complete")
