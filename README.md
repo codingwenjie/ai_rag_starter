@@ -131,7 +131,6 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ### 6️⃣ 验证安装
 访问以下地址验证服务正常运行：
 - 📖 API 文档：http://localhost:8000/docs
-- 🔍 健康检查：http://localhost:8000/health
 
 ---
 
@@ -230,41 +229,6 @@ curl "http://localhost:8000/api/rag/documents/collections"
 - 🔐 **用户系统**：添加用户认证和权限管理
 - 📱 **移动端**：开发移动端应用
 - 🌐 **多语言**：支持多语言文档和问答
-
----
-
-## ❓ 常见问题
-
-### Q1: 启动时提示 "OpenAI API key not found"
-**A**: 请检查 `.env` 文件是否正确配置了 `OPENAI_API_KEY`，确保 API key 有效且有足够余额。
-
-### Q2: 文档上传后问答效果不好
-**A**: 可能的原因：
-- 文档内容质量不高，建议使用结构化、内容丰富的文档
-- 文档分块大小不合适，可以调整 `chunk_size` 参数
-- 问题表述不够清晰，尝试换个问法
-
-### Q3: 如何使用其他大模型？
-**A**: 项目支持多种模型，在 `.env` 文件中配置相应的 API key 即可：
-```bash
-# 智谱 AI
-ZHIPU_API_KEY=your_zhipu_key
-
-# 其他模型...
-```
-
-### Q4: 向量数据库数据丢失怎么办？
-**A**: 默认使用 FAISS 本地存储，数据保存在 `vector_stores/` 目录。如需持久化，建议：
-- 定期备份 `vector_stores/` 目录
-- 考虑使用云端向量数据库（如 Pinecone、Qdrant）
-
-### Q5: 如何提高问答准确性？
-**A**: 几个优化建议：
-- 提供高质量的知识文档
-- 优化文档的结构和格式
-- 调整检索参数（top_k、score_threshold）
-- 优化提示词模板
-- 使用更强大的模型
 
 ---
 
